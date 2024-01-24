@@ -20,7 +20,7 @@ body{
     justify-content: center;
     gap: 5px;
     width: 400px;
-    height: 500px;
+    height: 550px;
     margin: 0 auto;
     padding: 15px;
     background-color: #F0ECE7;
@@ -32,9 +32,17 @@ body{
     border-radius: 10px;
     padding: 15px;
     background-color: #9FBBB3;
-    font-size: 42px;
-    color: white;
     text-align: end;
+    color: white;
+
+}
+.last-op {
+    background-color: #9FBBB3;
+    color: #e9efed;
+    font-size: 18px;
+}
+.display{
+    font-size: 42px;
 }
 .buttons-cont{
     flex: 3;
