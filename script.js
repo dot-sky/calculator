@@ -5,7 +5,7 @@ function Calculator() {
         "*": (a, b) => a * b,
         "/": (a, b) => {
             if (b !== 0) {
-                return a / b;
+                return Math.floor((a/b) * 10000) / 10000;
             }
             else {
                 this.throwError();
