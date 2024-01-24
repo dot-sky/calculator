@@ -18,6 +18,13 @@ function addButtons(){
             button.className = "button";
             button.setAttribute("id",btnMatrix[i][j]);
             button.textContent = btnMatrix[i][j];
+            button.addEventListener("click", () => {
+                const btnAction = button.getAttribute("id");
+                if (btnAction !== "del"){
+                    display.textContent += btnAction;
+                    console.log(btnAction);
+                }
+            });
             row.appendChild(button);
         }
         buttonsContainer.appendChild(row);
@@ -32,4 +39,13 @@ const btnMatrix = [
 ]
 const calc = new Calculator();
 const buttonsContainer = document.querySelector(".buttons-cont");
+const display = document.querySelector(".display");
 addButtons();
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () =>{
+    display.textContent = "";
+})
+const delButton = document.querySelector("#del");
+delButton.addEventListener("click", () =>{
+    display.textContent = display.textContent.slice(0, -1);
+})
