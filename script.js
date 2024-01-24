@@ -66,6 +66,7 @@ function addButtonEvents(button) {
         else if (btnAction === "del") {
             if (display.textContent.at(-1) === " ") {
                 display.textContent = display.textContent.slice(0, -3);
+                opCounter--;
             }
             else {
                 display.textContent = display.textContent.slice(0, -1);
@@ -74,7 +75,7 @@ function addButtonEvents(button) {
         else if (!isNaN(btnAction) || btnAction === ".") {
             display.textContent += btnAction;
         }
-        else if (btnAction === "=") {
+        else if (btnAction === "=" && !isNaN(lastAction)) {
             doCalculation();
             opCounter = 0;
         }
