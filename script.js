@@ -1,17 +1,20 @@
 function Calculator() {
     this.operation = {
-        "+": (a, b) => a + b,
-        "-": (a, b) => a - b,
-        "*": (a, b) => a * b,
+        "+": (a, b) => this.Round(a + b),
+        "-": (a, b) => this.Round(a - b),
+        "*": (a, b) => this.Round(a * b),
         "/": (a, b) => {
             if (b !== 0) {
-                return Math.floor((a / b) * 10000) / 10000;
+                return this.Round(a,b);
             }
             else {
                 this.throwError();
                 return "error";
             }
         },
+    }
+    this.Round = function(num){
+        return Math.floor(num * 10000) / 10000;
     }
     this.calculate = function (a, op, b) {
         return this.operation[op](parseFloat(a), parseFloat(b));
@@ -48,13 +51,18 @@ function addButtons() {
 }
 function doCalculation() {
     lastOp.textContent = display.textContent + " =";
-    display.textContent = calc.operate(display.textContent);
+    const result = calc.operate(display.textContent)
+    display.textContent = result;
+    if (Math.floor(result) === result){
+        dotActive = false;
+    }
 }
 function clearCalc() {
     display.textContent = "";
     lastOp.textContent = " ";
     lastAction = "+";
     opCounter = 0;
+    dotActive = false;
     if (errorRaised) {
         displayCont.style.backgroundColor = GREEN;
         errorRaised = false;
@@ -71,13 +79,26 @@ function addButtonEvents(button) {
             if (display.textContent.at(-1) === " ") {
                 display.textContent = display.textContent.slice(0, -3);
                 opCounter--;
+                dotActive = false;
             }
             else {
+                if (display.textContent.at(-1) === "."){
+                    dotActive = false;
+                }
                 display.textContent = display.textContent.slice(0, -1);
             }
         }
-        else if (!isNaN(btnAction) || btnAction === ".") {
+        else if (!isNaN(btnAction) ) {
             display.textContent += btnAction;
+        }
+        else if(btnAction === "." ){
+            if (!dotActive){
+                display.textContent += btnAction;
+                dotActive = true;
+            }
+            else{
+                btnAction = lastAction;
+            }
         }
         else if (btnAction === "(-)") {
             if (display.textContent.length === 0 || display.textContent.at(-1) === " "){
@@ -94,13 +115,15 @@ function addButtonEvents(button) {
         else if (isNaN(lastAction) && !SPECIAL_KEYS.includes(lastAction)) {
             return;
         }
-        else if (opCounter > 0 && btnAction !== "=") {
+        else if (opCounter > 0 && btnAction !== "=" ) {
             doCalculation();
+            console.log("this");
             display.textContent += " " + btnAction + " ";
             opCounter = 1;
         }
         else if (display.textContent !== "") {
             display.textContent += " " + btnAction + " ";
+            dotActive = false;
             opCounter++;
         }
         lastAction = btnAction;
@@ -125,6 +148,7 @@ const cont = document.querySelector(".container");
 const calc = new Calculator();
 let errorRaised = false;
 let opCounter = 0;
+let dotActive = false;
 let lastAction = "+";
 addButtons();
 const clear = document.querySelector("#clear");
