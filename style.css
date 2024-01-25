@@ -61,12 +61,14 @@ body{
 .button.accent{
     color: #6ebaa4;
 }   
-.button{
-    box-sizing: border-box;
-    flex: 1;
+.flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.button{
+    box-sizing: border-box;
+    flex: 1;
     margin: 5px;
     border:  1px solid #D9D9D9;
     border-bottom: 5px solid #D9D9D9;
@@ -74,4 +76,11 @@ body{
     font-size: 20px;
     font-weight: 600;
     color: #615F5D;
+}
+footer{
+    gap: 6px;
+    font-size: 14px;
+    margin-top: 25px;
+    color: #31312f;
+
 }

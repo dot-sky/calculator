@@ -34,7 +34,7 @@ function addButtons() {
         row.className = "row";
         for (let j = 0; j < BTN_MATRIX[i].length; j++) {
             const button = document.createElement("div");
-            button.className = "button";
+            button.className = "button flex-center";
             if (i== 0 || j+1 == BTN_MATRIX[i].length){
                 button.classList.add("accent");
             }
