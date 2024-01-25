@@ -71,7 +71,6 @@ function clearCalc() {
 function addButtonEvents(button) {
     button.addEventListener("click", () => {
         let btnAction = button.getAttribute("id");
-        console.log(lastAction + " " + btnAction);
         if (btnAction === "clear" || errorRaised) {
             clearCalc();
         }
