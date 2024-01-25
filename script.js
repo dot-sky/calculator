@@ -5,7 +5,7 @@ function Calculator() {
         "*": (a, b) => a * b,
         "/": (a, b) => {
             if (b !== 0) {
-                return Math.floor((a/b) * 10000) / 10000;
+                return Math.floor((a / b) * 10000) / 10000;
             }
             else {
                 this.throwError();
@@ -76,12 +76,12 @@ function addButtonEvents(button) {
         else if (!isNaN(btnAction) || btnAction === ".") {
             display.textContent += btnAction;
         }
-        else if (btnAction === "(-)"){
-            if (display.textContent.length === 0 || display.textContent.at(-1) === " ")
+        else if (btnAction === "(-)") {
+            if (display.textContent.length === 0 || display.textContent.at(-1) === " "){
                 display.textContent += "-";
-            else{
-                console.log("here")
-                btnAction = lastAction
+            }
+            else {
+                btnAction = lastAction;
             }
         }
         else if (btnAction === "=" && !isNaN(lastAction)) {
@@ -124,6 +124,6 @@ let errorRaised = false;
 let opCounter = 0;
 let lastAction = "+";
 addButtons();
-const clear = document.querySelector ("#clear");
+const clear = document.querySelector("#clear");
 clear.classList.add("larger");
 
