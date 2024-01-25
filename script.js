@@ -19,7 +19,7 @@ function Calculator() {
     this.operate = function (str) {
         const op = str.split(" ");
         if (op.length !== 3) {
-            return 0;
+            return op[0];
         }
         return this.calculate(...op)
     };
@@ -29,10 +29,10 @@ function Calculator() {
     };
 }
 function addButtons() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < BTN_MATRIX.length; i++) {
         const row = document.createElement("div");
         row.className = "row";
-        for (let j = 0; j < 4; j++) {
+        for (let j = 0; j < BTN_MATRIX[i].length; j++) {
             const button = document.createElement("div");
             button.className = "button";
             button.setAttribute("id", BTN_MATRIX[i][j]);
@@ -59,7 +59,8 @@ function clearCalc() {
 }
 function addButtonEvents(button) {
     button.addEventListener("click", () => {
-        const btnAction = button.getAttribute("id");
+        let btnAction = button.getAttribute("id");
+        console.log(lastAction + " " + btnAction);
         if (btnAction === "clear" || errorRaised) {
             clearCalc();
         }
@@ -75,6 +76,14 @@ function addButtonEvents(button) {
         else if (!isNaN(btnAction) || btnAction === ".") {
             display.textContent += btnAction;
         }
+        else if (btnAction === "(-)"){
+            if (display.textContent.length === 0 || display.textContent.at(-1) === " ")
+                display.textContent += "-";
+            else{
+                console.log("here")
+                btnAction = lastAction
+            }
+        }
         else if (btnAction === "=" && !isNaN(lastAction)) {
             doCalculation();
             opCounter = 0;
@@ -82,7 +91,8 @@ function addButtonEvents(button) {
         else if (isNaN(lastAction) && !SPECIAL_KEYS.includes(lastAction)) {
             return;
         }
-        else if (opCounter > 0) {
+        else if (opCounter > 0 && btnAction !== "=") {
+            console.log("aaa")
             doCalculation();
             display.textContent += " " + btnAction + " ";
             opCounter = 1;
@@ -98,11 +108,11 @@ const RED = "#d48383";
 const GREEN = "#9FBBB3";
 const SPECIAL_KEYS = ["clear", "=", "del"];
 const BTN_MATRIX = [
-    ["clear", "x", "del", "/"],
+    ["clear", "del", "/"],
     ["7", "8", "9", "*"],
     ["4", "5", "6", "-"],
     ["1", "2", "3", "+"],
-    ["-", "0", ".", "="]
+    ["(-)", "0", ".", "="]
 ];
 const buttonsContainer = document.querySelector(".buttons-cont");
 const display = document.querySelector(".display");

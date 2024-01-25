@@ -53,6 +53,9 @@ body{
     display: flex;
     flex: 1;
 }
+.larger{
+    flex: 2;
+}
 .button{
     box-sizing: border-box;
     flex: 1;
