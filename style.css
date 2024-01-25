@@ -53,7 +53,7 @@ body{
     display: flex;
     flex: 1;
 }
-.larger{
+.button.larger{
     flex: 2;
 }
 .button{

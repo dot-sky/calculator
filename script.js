@@ -92,7 +92,6 @@ function addButtonEvents(button) {
             return;
         }
         else if (opCounter > 0 && btnAction !== "=") {
-            console.log("aaa")
             doCalculation();
             display.textContent += " " + btnAction + " ";
             opCounter = 1;
@@ -119,10 +118,12 @@ const display = document.querySelector(".display");
 const displayCont = document.querySelector(".display-cont");
 const lastOp = document.querySelector(".last-op");
 const cont = document.querySelector(".container");
+
 const calc = new Calculator();
 let errorRaised = false;
 let opCounter = 0;
 let lastAction = "+";
 addButtons();
-
+const clear = document.querySelector ("#clear");
+clear.classList.add("larger");
 
