@@ -35,6 +35,9 @@ function addButtons() {
         for (let j = 0; j < BTN_MATRIX[i].length; j++) {
             const button = document.createElement("div");
             button.className = "button";
+            if (i== 0 || j+1 == BTN_MATRIX[i].length){
+                button.classList.add("accent");
+            }
             button.setAttribute("id", BTN_MATRIX[i][j]);
             button.textContent = BTN_MATRIX[i][j];
             addButtonEvents(button);
